@@ -1,3 +1,4 @@
+import GalleryItem from "../GalleryItem/GalleryItem";
 
 function GalleryList({galleryList, getGalleryList}) {
     console.log('in GalleryList');
