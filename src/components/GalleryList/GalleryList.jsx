@@ -8,7 +8,7 @@ function GalleryList({galleryList, getGalleryList}) {
             {galleryList.map((item) => (
               <GalleryItem
                 item={item}
-                // need??? key={item.id}
+                key={item.id}
                 getGalleryList={getGalleryList}
               />
             ))}
