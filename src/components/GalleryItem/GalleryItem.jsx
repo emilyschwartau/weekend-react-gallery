@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function GalleryItem ({ galleryItem, getGalleryList }) {
     let returnItem = '';
+
     const likeItem = () => {
         console.log("Clicked Like", galleryItem.id);
         axios({
@@ -19,43 +20,33 @@ function GalleryItem ({ galleryItem, getGalleryList }) {
           });
       };
 
-      const [photoView, setPhotoView] = useState(true);
-
-     
-
-    // // function handlePhotoClick () {
-    // //     console.log('Clicked Photo');
-    // // }
+const [photoView, setPhotoView] = useState(true);
 
     if (photoView == true) { 
         returnItem = 
-        (<div className="gallery-item" onClick={() => setPhotoView(false)}>
-            <p><img src={galleryItem.path}/></p>
-            <button onClick={likeItem}>Love it!</button>
-            <p>{galleryItem.likes} people love this!</p>
+        (<div className="gallery-item"> 
+            <div className="image" onClick={() => setPhotoView(false)}>
+                <p><img src={galleryItem.path}/></p>
+            </div>
+            <div className="likes">
+                <button onClick={likeItem}>Love it!</button>
+                <p>{galleryItem.likes} people love this!</p>
+            </div>
         </div>)  
     }//end if
 
     else if (photoView == false) {
         returnItem = 
         (<div className="gallery-item">
-            <p>{galleryItem.description}</p>
-            <button onClick={likeItem}>Love it!</button>
-            <p>{galleryItem.likes} people love this!</p>
+            <div className="image" onClick={() => setPhotoView(true)}>
+                <p>{galleryItem.description}</p>
+            </div>
+            <div className="likes">
+                <button onClick={likeItem}>Love it!</button>
+                <p>{galleryItem.likes} people love this!</p>
+            </div>
         </div>)
     }//end else if 
-
-//    function activateDescription () {
-//        console.log('clicked div');
-//        return (
-//         <div className="gallery-item">
-//             <p>{galleryItem.description}</p>
-//             <button onClick={likeItem}>Love it!</button>
-//             <p>{galleryItem.likes} people love this!</p>
-//         </div>
-//         //getGalleryList();
-//        )
-//    }
 
     return returnItem;
    
