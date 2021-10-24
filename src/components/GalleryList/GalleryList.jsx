@@ -5,10 +5,10 @@ function GalleryList({galleryList, getGalleryList}) {
 
     return (
         <>
-            {galleryList.map((item) => (
+            {galleryList.map((galleryItem) => (
               <GalleryItem
-                item={item}
-                key={item.id}
+                galleryItem={galleryItem}
+                key={galleryItem.id}
                 getGalleryList={getGalleryList}
               />
             ))}

@@ -1,43 +1,68 @@
 import './GalleryItem.css'
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
-function GalleryItem ({ item, getGalleryList }) {
-
-    let returnItem = '';
-
-    if (item.photoView == true) { 
-        returnItem = 
-        (<div className="gallery-item">
-            <p><img src={item.path}/></p>
-            <p>{item.likes} people love this!</p>
-        </div>)  
-    }//end if
-
-    else if (item.photoView == false) {
-        returnItem = 
-        (<div className="gallery-item">
-            <p>{item.description}</p>
-            <p>{item.likes} people love this!</p>
-        </div>)
-    }//end else if 
-
-    const ChangePhotoViewToTrue = () => {
-        //let idToPurchase = item.id;
-        console.log("Clicked ChangePhotoViewToTrue", item.id);
+function GalleryItem ({ galleryItem, getGalleryList }) {
+    
+    const likeItem = () => {
+        console.log("Clicked Like", galleryItem.id);
         axios({
           method: "PUT",
-          url: '/gallery/like/:id'
+          url: `/gallery/like/${galleryItem.id}`
         })
           .then((response) => {
-            console.log("PUT purchase response is", response);
-            getGroceryList();
+            console.log("PUT like response is", response);
+            getGalleryList();
           })
           .catch((error) => {
-            console.log("PUT purchase error", error);
+            console.log("PUT like error", error);
           });
       };
 
-    return returnItem;
+    // let returnItem = '';
+
+    // // function handlePhotoClick () {
+    // //     console.log('Clicked Photo');
+    // // }
+
+    // if (item.photoView == true) { 
+    //     returnItem = 
+    //     (<div className="gallery-item">
+    //         <p><img src={item.path}/></p>
+    //         <button onClick={likeItem}>Love it!</button>
+    //         <p>{item.likes} people love this!</p>
+    //     </div>)  
+    // }//end if
+
+    // else if (item.photoView == false) {
+    //     returnItem = 
+    //     (<div className="gallery-item">
+    //         <p>{item.description}</p>
+    //         <button onClick={likeItem}>Love it!</button>
+    //         <p>{item.likes} people love this!</p>
+    //     </div>)
+    // }//end else if 
+
+   
+
+    return (
+        <div className="gallery-item">
+            <p><img src={galleryItem.path}/></p>
+            <button onClick={likeItem}>Love it!</button>
+            <p>{galleryItem.likes} people love this!</p>
+        </div> 
+
+
+    )
+
+
+
+    
+
+    
+
+
+    
 }
 
 export default GalleryItem;
